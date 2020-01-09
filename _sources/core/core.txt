@@ -1,0 +1,3298 @@
+----
+core
+----
+
+.. toctree::
+
+
+option.wake
+-----------
+.. wake:data:: data Option a
+
+	The ``Option`` datatype.  Either holds a valid entry with value ``a`` (``Some``), or nothing (``None``).
+	
+
+.. wake:function:: def isSome
+
+	Returns ``True`` if the ``Option`` contains a value, or ``False`` if it is empty.
+	
+
+	Parameters: ``Option a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isNone
+
+	Returns ``True`` if the ``Option`` is empty, ``False`` otherwise.
+	
+
+	Parameters: ``Option a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def getOrElse b
+
+	Returns the ``Option``'s value if it is exists, or ``b`` if the ``Option`` is empty.
+	
+
+	Parameters: ``b: a,  Option a``
+
+	Return Type: ``a``
+
+.. wake:function:: def orElse
+
+	Inteded use: ``int "x" | orElse (int "z") | getOrElse 4``
+	In this case, returns ``x`` if it exists, otherwise ``z``.  Returns ``None`` if both are empty.
+	
+
+	Parameters: ``Option a,  Option a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def getOrElseFn fn
+
+	Returns the Option's value if Some, otherwise returns the result of fn
+	(fn: Unit => a) => Option a => a
+	
+
+	Parameters: ``fn: Unit,  a,  Option a``
+
+	Return Type: ``a``
+
+.. wake:function:: def omap f
+
+	Either returns an Option containing result of invoking f on the Option's value if it exists, or None if the Option is empty.
+	
+
+	Parameters: ``f: a,  b,  Option a``
+
+	Return Type: ``Option b``
+
+.. wake:function:: def omapPartial f
+
+	Either returns the result of invoking f on the Option's value if it exists, or None if the Option is empty.
+	Unlike omap, it does not return an Option, but just the value itself, unless it is None.
+	
+
+	Parameters: ``f: a,  Option b,  Option a``
+
+	Return Type: ``Option b``
+
+.. wake:function:: def ofilter f
+
+	Either returns the original Option if its value satisfies the function f, otherwise it returns None.
+	
+
+	Parameters: ``f: a,  Boolean,  Option a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def findSome
+
+	Finds the first Some in a List of Option or returns None if List is all None
+	List (Option a) => Option a
+	
+
+	Parameters: ``List Option a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def findSomeFn fn
+
+	Applies a function that returns Option to each element of a List
+	returning the first Some or a None
+	(fn: a => Option b) => List a => Option b
+	
+
+	Parameters: ``fn: a,  Option b,  List a``
+
+	Return Type: ``Option b``
+
+.. wake:function:: def findNone
+
+	If a List of Options is all Some, returns Some of the elements, otherwise None
+	List (Option a) => Option (List a)
+	
+
+	Parameters: ``List Option a``
+
+	Return Type: ``Option (List a)``
+
+.. wake:function:: def findNoneFn fn
+
+	Applies a function that returns Option to each element of a List
+	returning None if any result is None, otherwise aggregates the Somes into a List
+	(fn: a => Option b) => List a => Option (List b)
+	
+
+	Parameters: ``fn: a,  Option b,  List a``
+
+	Return Type: ``Option (List b)``
+
+.. wake:function:: def getOrFail f
+
+	Converts Some to Pass or Fail
+	(f: a) => Option b => Result b a
+	
+
+	Parameters: ``f: a,  Option b``
+
+	Return Type: ``Result b a``
+
+.. wake:function:: def getOrFailFn fn
+
+	Converts Some to Pass or Fail of output of fn
+	(fn: Unit => a) => Option b => Result b a
+	
+
+	Parameters: ``fn: Unit,  a,  Option b``
+
+	Return Type: ``Result b a``
+
+.. wake:function:: def getOrPass p
+
+	Converts Some to Fail or Pass
+	(p: a) => Option b => Result a b
+	
+
+	Parameters: ``p: a,  Option b``
+
+	Return Type: ``Result a b``
+
+.. wake:function:: def getOrPassFn fn
+
+	Converts Some to Fail or Pass of output of fn
+	(fn: Unit => a) => Option b => Result a b
+	
+
+	Parameters: ``fn: Unit,  a,  Option b``
+
+	Return Type: ``Result a b``
+
+tree.wake
+---------
+.. wake:function:: def tnew cmp
+
+	Create a new Tree, sorted by cmp.
+	
+
+	Parameters: ``cmp: a,  a,  Order``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def listToTree cmp list
+
+	Convert a List to a Tree.
+	
+
+	Parameters: ``cmp: a,  a,  Order,  list: List a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def listToTreeMulti cmp list
+
+	No description for this feature yet.
+
+	Parameters: ``cmp: a,  a,  Order,  list: List a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def vectorToTreeMulti cmp v
+
+	No description for this feature yet.
+
+	Parameters: ``cmp: a,  a,  Order,  v: Vector a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def vectorToTree cmp v
+
+	Convert a Vector to a Tree.
+	
+
+	Parameters: ``cmp: a,  a,  Order,  v: Vector a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tlen (Tree _ root)
+
+	Returns the total length of the Tree.
+	
+
+	Parameters: ``Tree a``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def tempty (Tree _ root)
+
+	Returns True if the Tree is empty, False otherwise.
+	
+
+	Parameters: ``Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tinsert y (Tree cmp root)
+
+	Insert y into the tree only if no other keys = y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tinsertReplace y (Tree cmp root)
+
+	Insert y into the tree, removing any existing keys = y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tinsertMulti y (Tree cmp root)
+
+	Insert y into the tree at the lowest rank of keys = y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def a ⊆ b
+
+	Returns True if a is a subset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def a ⊇ b
+
+	Returns True if a is a superset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def a ⊉ b
+
+	Returns True if a is NOT a superset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def a ⊈ b
+
+	Returns True if a is NOT a subset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def a ⊊ b
+
+	Returns True if a is a proper subset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def a ⊋ b
+
+	Returns True if a is a proper superset of b, otherwise False.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tsubset (Tree _ aroot) (Tree cmp broot)
+
+	Returns True if every element of a is also in b, otherwise false.
+	
+
+	Parameters: ``Tree a,  Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tdelete y (Tree cmp root)
+
+	Deletes all keys that are equal to y.
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tfoldl f a (Tree _ root)
+
+	Folds from left to right.
+	
+
+	Parameters: ``a,  b,  a,  a,  Tree b``
+
+	Return Type: ``a``
+
+.. wake:function:: def tfoldr f a (Tree _ root)
+
+	Folds from right to left.
+	
+
+	Parameters: ``a,  b,  b,  b,  Tree a``
+
+	Return Type: ``b``
+
+.. wake:function:: def tfoldmap f a g (Tree _ root)
+
+	Fold in parallel; assumes f is an associative operator and has type: a => a => a
+	
+
+	Parameters: ``a,  a,  a,  b,  b,  a,  Tree b``
+
+	Return Type: ``a``
+
+.. wake:function:: def tfold f a t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  a,  a,  a: a,  t: Tree a``
+
+	Return Type: ``a``
+
+.. wake:function:: def treeToList
+
+	Converts a Tree to a List.
+	
+
+	Parameters: ``Tree a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def tappi f (Tree _ root)
+
+	No description for this feature yet.
+
+	Parameters: ``Integer,  a,  b,  Tree a``
+
+	Return Type: ``Unit``
+
+.. wake:function:: def tat i (Tree _ root)
+
+	Extract the i-th ranked element
+	
+
+	Parameters: ``Integer,  Tree a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def tsplitAt i (Tree cmp root)
+
+	Split elements ranked [0,i) and [i,inf) into two trees
+	
+
+	Parameters: ``Integer,  Tree a``
+
+	Return Type: ``Pair (Tree a) (Tree a)``
+
+.. wake:function:: def ttake i t
+
+	No description for this feature yet.
+
+	Parameters: ``i: Integer,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tdrop i t
+
+	No description for this feature yet.
+
+	Parameters: ``i: Integer,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tfind f (Tree _ root)
+
+	Lowest rank element where f x = True  => Option (Pair x rank)
+	
+
+	Parameters: ``a,  Boolean,  Tree a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def tsplitUntil f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Tree a``
+
+	Return Type: ``Pair (Tree a) (Tree a)``
+
+.. wake:function:: def ttakeUntil f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tdropUntil f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def texists f t
+
+	Returns True if there exists an x in t where f x = True
+	
+
+	Parameters: ``f: a,  Boolean,  t: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tforall f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tsplit y (Tree cmp root)
+
+	Split tree into those elements <, =, and > y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Triple (Tree a) (Tree a) (Tree a)``
+
+.. wake:function:: def tsplitBy f (Tree cmp root)
+
+	Split tree into those elements where f x = True and those where f x = False
+	
+
+	Parameters: ``a,  Boolean,  Tree a``
+
+	Return Type: ``Pair (Tree a) (Tree a)``
+
+.. wake:function:: def tfilter f (Tree cmp root)
+
+	Remove all elements x such that f x = False.
+	
+
+	Parameters: ``a,  Boolean,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tmin (Tree _ root)
+
+	Return the smallest element in the tree.
+	
+
+	Parameters: ``Tree a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def tmax (Tree _ root)
+
+	Return the largest element in the tree.
+	
+
+	Parameters: ``Tree a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def tlowerGE y (Tree cmp root)
+
+	Lowest rank element with x >= y.
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def tlowerGT y (Tree cmp root)
+
+	Lowest rank element with x > y.
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def tupperLT y (Tree cmp root)
+
+	Highest rank element with x < y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def tupperLE y (Tree cmp root)
+
+	Highest rank element with x <= y
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def tequal y (Tree cmp root)
+
+	Extract all elements from the tree which are equal to y
+	=> Pair (matches: List x) (rank: Integer)
+	
+
+	Parameters: ``a,  Tree a``
+
+	Return Type: ``Pair (List a) Integer``
+
+.. wake:function:: def x ∈ y
+
+	Returns True if x is an element of y, False otherwise.
+	
+
+	Parameters: ``x: a,  y: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ∉ y
+
+	Returns True if x is NOT an element of y, False otherwise.
+	
+
+	Parameters: ``x: a,  y: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ∋ y
+
+	Returns True if x contains y, False otherwise.
+	
+
+	Parameters: ``x: Tree a,  y: a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ∌ y
+
+	Returns True if x does NOT contain y, False otherwise.
+	
+
+	Parameters: ``x: Tree a,  y: a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tcontains y t
+
+	No description for this feature yet.
+
+	Parameters: ``y: a,  t: Tree a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def tdistinctBy cmp t
+
+	Eliminate duplicates, as identified by cmp
+	
+
+	Parameters: ``cmp: a,  a,  Order,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tdistinctRunBy f t
+
+	Eliminate duplicates, as identified by f
+	
+
+	Parameters: ``f: a,  a,  Boolean,  t: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def a ∪ b
+
+	Returns the union of trees a and b, keeps only values from a if they are equal to values in b.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tunion (Tree _ aroot) (Tree cmp broot)
+
+	Returns the union of two trees, given their roots.
+	
+
+	Parameters: ``Tree a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def a ⊎ b
+
+	Union of two trees, keeping equal values of a before equal values of b
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tunionMulti (Tree _ aroot) (Tree cmp broot)
+
+	No description for this feature yet.
+
+	Parameters: ``Tree a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def a ∖ b
+
+	Returns the set difference of A and B, that is, a tree containing all elements of A which are not in B.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tsubtract (Tree _ aroot) (Tree cmp broot)
+
+	No description for this feature yet.
+
+	Parameters: ``Tree a,  Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def a ∩ b
+
+	Returns a tree containing all elements of A which are also in B.
+	
+
+	Parameters: ``a: Tree a,  b: Tree a``
+
+	Return Type: ``Tree a``
+
+.. wake:function:: def tintersect (Tree _ aroot) (Tree cmp broot)
+
+	No description for this feature yet.
+
+	Parameters: ``Tree a,  Tree a``
+
+	Return Type: ``Tree a``
+
+tuple.wake
+----------
+.. wake:data:: data Unit
+
+	unit / void
+	
+
+.. wake:tuple:: tuple Pair a b
+
+	Creates a ``Pair``, a tuple containing two elements.
+	
+
+	Parameters: ``Pair a b,  c,  Pair a b``
+
+	Return Type: ``c``
+
+.. wake:function:: def x → y
+
+	Defines an arrow operator as an alternate way to initialize a ``Pair``.
+	
+
+	Parameters: ``x: a,  y: b``
+
+	Return Type: ``Pair a b``
+
+.. wake:tuple:: tuple Triple a b c
+
+	Creates a ``Triple``, a tuple containing three elements.
+	
+
+	Parameters: ``Triple a b c,  d,  Triple a b c``
+
+	Return Type: ``d``
+
+.. wake:data:: data a,, b
+
+	Variable length Tuples (terminate with Unit)
+	aka: a List with fixed length and heterogeneous element types
+	Examples:
+	def tup = (1,, "xx",, 1e8,, Unit)
+	def (x,, y,, z,, Unit) = tup
+	def _ = println (str tup._0)
+	def _ = println (dstr tup._2)
+	
+
+.. wake:function:: def _0 (x,, _)
+
+	Handy accessor methods
+	
+
+	Parameters: ``a,, b``
+
+	Return Type: ``a``
+
+.. wake:function:: def _1 (_,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c``
+
+	Return Type: ``b``
+
+.. wake:function:: def _2 (_,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d``
+
+	Return Type: ``c``
+
+.. wake:function:: def _3 (_,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e``
+
+	Return Type: ``d``
+
+.. wake:function:: def _4 (_,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f``
+
+	Return Type: ``e``
+
+.. wake:function:: def _5 (_,, _,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f,, g``
+
+	Return Type: ``f``
+
+.. wake:function:: def _6 (_,, _,, _,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f,, g,, h``
+
+	Return Type: ``g``
+
+.. wake:function:: def _7 (_,, _,, _,, _,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f,, g,, h,, i``
+
+	Return Type: ``h``
+
+.. wake:function:: def _8 (_,, _,, _,, _,, _,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f,, g,, h,, i,, j``
+
+	Return Type: ``i``
+
+.. wake:function:: def _9 (_,, _,, _,, _,, _,, _,, _,, _,, _,, x,, _)
+
+	No description for this feature yet.
+
+	Parameters: ``a,, b,, c,, d,, e,, f,, g,, h,, i,, j,, k``
+
+	Return Type: ``j``
+
+syntax.wake
+-----------
+.. wake:function:: def argument . memberFn
+
+	Flip function and object order
+	
+
+	Parameters: ``argument: a,  memberFn: a,  b``
+
+	Return Type: ``b``
+
+.. wake:function:: def argument | pipeFn
+
+	No description for this feature yet.
+
+	Parameters: ``argument: a,  pipeFn: a,  b``
+
+	Return Type: ``b``
+
+.. wake:function:: def dollarFn $ argument
+
+	Avoid ()s without changing order
+	
+
+	Parameters: ``dollarFn: a,  b,  argument: a``
+
+	Return Type: ``b``
+
+.. wake:function:: def f ∘ g
+
+	The ring operator is used to denote the composition of functions.
+	
+
+	Parameters: ``f: a,  b,  g: c,  a,  x: c``
+
+	Return Type: ``b``
+
+.. wake:function:: def flip f x y
+
+	Allows flipping the parameters of a function.
+	
+
+	Parameters: ``f: a,  b,  c,  x: b,  y: a``
+
+	Return Type: ``c``
+
+integer.wake
+------------
+.. wake:function:: def +x
+
+	Unary positive sign operator for Integers.
+	
+
+	Parameters: ``x: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def -x
+
+	Unary negative sign operator for Integers.
+	
+
+	Parameters: ``x: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def ~x
+
+	Unary two's complement operator for Integers.
+	
+
+	Parameters: ``x: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x + y
+
+	Binary addition operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x - y
+
+	Binary subtraction operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x * y
+
+	Binary multiplication operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x / y
+
+	Binary division operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x % y
+
+	Binary remainder operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x << y
+
+	Binary left shift operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x >> y
+
+	Binary right shift operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def x ^ y
+
+	Binary exponentiation operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def root x n
+
+	Returns the nth root of x.
+	
+
+	Parameters: ``x: Integer,  n: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def sqrt x
+
+	Unary square root operator.
+	
+
+	Parameters: ``x: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def abs x
+
+	Unary absolute-value operator.
+	
+
+	Parameters: ``x: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def xor x y
+
+	Binary bitwise XOR operator.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def and x y
+
+	Binary bitwise AND operator.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def or  x y
+
+	Binary bitwise OR operator.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def gcd x y
+
+	Greatest Common Divisor.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def lcm x y
+
+	Least Common Multiple.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def powm x y m
+
+	Computes (x^y) % m.
+	
+
+	Parameters: ``x: Integer,  y: Integer,  m: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def icmp x y
+
+	No description for this feature yet.
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <=> y
+
+	No description for this feature yet.
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <  y
+
+	Binary Less-Than operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >  y
+
+	Binary Greater-Than operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >= y
+
+	Binary Greater-Or-Equal operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <= y
+
+	Binary Less-Or-Equal operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x == y
+
+	Binary Is-Equal operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x != y
+
+	Binary Not-Equal operator for Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def min x y
+
+	Calculates the minimum of two Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def max x y
+
+	Calculates the maximum of two Integers.
+	
+
+	Parameters: ``x: Integer,  y: Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def prod
+
+	Calculates the product of a list of integers.
+	
+
+	Parameters: ``List Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def ∏ l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def sum
+
+	Calculates the sum of a list of integers.
+	
+
+	Parameters: ``List Integer``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def ∑ l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List Integer``
+
+	Return Type: ``Integer``
+
+string.wake
+-----------
+.. wake:function:: def strlen string
+
+	No description for this feature yet.
+
+	Parameters: ``string: String``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def cat listString
+
+	No description for this feature yet.
+
+	Parameters: ``listString: List String``
+
+	Return Type: ``String``
+
+.. wake:function:: def catWith separator strings
+
+	No description for this feature yet.
+
+	Parameters: ``separator: String,  strings: List String``
+
+	Return Type: ``String``
+
+.. wake:function:: def explode str
+
+	String => List String of codepoints
+	
+
+	Parameters: ``str: String``
+
+	Return Type: ``List String``
+
+.. wake:function:: def strbase base n
+
+	String <=> Integer type conversion
+	
+
+	Parameters: ``base: Integer,  n: Integer``
+
+	Return Type: ``String``
+
+.. wake:function:: def intbase base s
+
+	No description for this feature yet.
+
+	Parameters: ``base: Integer,  s: String``
+
+	Return Type: ``Option Integer``
+
+.. wake:function:: def str n
+
+	No description for this feature yet.
+
+	Parameters: ``n: Integer``
+
+	Return Type: ``String``
+
+.. wake:function:: def int s
+
+	No description for this feature yet.
+
+	Parameters: ``s: String``
+
+	Return Type: ``Option Integer``
+
+.. wake:function:: def integerToUnicode i
+
+	String <=> Integer Unicode conversion
+	
+
+	Parameters: ``i: Integer``
+
+	Return Type: ``String``
+
+.. wake:function:: def unicodeToInteger s
+
+	No description for this feature yet.
+
+	Parameters: ``s: String``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def integerToByte i
+
+	String <=> Integer Binary conversion (Warning: may create invalid Unicode)
+	
+
+	Parameters: ``i: Integer``
+
+	Return Type: ``String``
+
+.. wake:function:: def byteToInteger s
+
+	No description for this feature yet.
+
+	Parameters: ``s: String``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def version
+
+	Version of wake
+	
+
+	Parameters: None
+
+	Return Type: ``String``
+
+.. wake:function:: def unicodeCanonical  x
+
+	Unicode normalization methods
+	
+
+	Parameters: ``x: String``
+
+	Return Type: ``String``
+
+.. wake:function:: def unicodeIdentifier x
+
+	No description for this feature yet.
+
+	Parameters: ``x: String``
+
+	Return Type: ``String``
+
+.. wake:function:: def unicodeLowercase  x
+
+	No description for this feature yet.
+
+	Parameters: ``x: String``
+
+	Return Type: ``String``
+
+.. wake:function:: def scmpCanonical x y
+
+	Unicode NFC string comparison Ç == C+◌̧
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def scmpIdentifier x y
+
+	Unicode NFKC string comparison (¼i⁹ = 1/4i9)
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def scmpLowercase x y
+
+	Unicode case insensitive NFKC comparison
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def scmp x y
+
+	Raw binary string comparison; no normalization performed
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <=>~y
+
+	NFKC order (fancy format removed) -- secure default
+	This is the string order you should probably be using
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <~  y
+
+	Returns True if x is less than y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >~  y
+
+	Returns True if x is greater than y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >=~ y
+
+	Returns True if x is greater than or equal to y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=~ y
+
+	Returns True if x is less than or equal to y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ==~ y
+
+	Returns True if x is equal to y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x !=~ y
+
+	Returns True if x is not equal to y.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=>^y
+
+	Case insensitive order (^ = capitals ignored)
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <^  y
+
+	Returns True if x is less than y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >^  y
+
+	Returns True if x is greater than y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >=^ y
+
+	Returns True if x is greater than or equal to y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=^ y
+
+	Returns True if x is less than or equal to y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ==^ y
+
+	Returns True if x is equal to y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x !=^ y
+
+	Returns True if x is not equal to y, ignoring case.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=>*y
+
+	Raw binary string order
+	Only use this for non-textual data
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <*  y
+
+	Returns True if x is less than y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >*  y
+
+	Returns True if x is greater than y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >=* y
+
+	Returns True if x is greater than or equal to y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=* y
+
+	Returns True if x is less than or equal to y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ==* y
+
+	Returns True if x is equal to y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x !=* y
+
+	Returns True if x is not equal to y, in raw binary representation.
+	
+
+	Parameters: ``x: String,  y: String``
+
+	Return Type: ``Boolean``
+
+order.wake
+----------
+.. wake:data:: data Order
+
+	Used for comparing quantities.
+	Can hold the following values:
+	``LT`` = Less Than
+	``EQ`` = Equal
+	``GT`` = Greater Than
+	
+
+.. wake:function:: def isLT
+
+	Returns ``True`` if less than, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isEQ
+
+	Returns ``True`` if equal, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isGT
+
+	Returns ``True`` if greater than, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isLE
+
+	Returns ``True`` if less or equal, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isNE
+
+	Returns ``True`` if not equal, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isGE
+
+	Returs ``True`` if greater or equal, otherwise ``False``.
+	
+
+	Parameters: ``Order``
+
+	Return Type: ``Boolean``
+
+result.wake
+-----------
+.. wake:data:: data Result pass fail
+
+	No description for this feature yet.
+
+.. wake:function:: def isPass
+
+	No description for this feature yet.
+
+	Parameters: ``Result a b``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def isFail
+
+	No description for this feature yet.
+
+	Parameters: ``Result a b``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def getPass
+
+	No description for this feature yet.
+
+	Parameters: ``Result a b``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def getFail
+
+	No description for this feature yet.
+
+	Parameters: ``Result a b``
+
+	Return Type: ``Option b``
+
+.. wake:function:: def getWhenFail fail
+
+	No description for this feature yet.
+
+	Parameters: ``fail: a,  Result a b``
+
+	Return Type: ``a``
+
+.. wake:function:: def rmap fn
+
+	No description for this feature yet.
+
+	Parameters: ``fn: a,  b,  Result a c``
+
+	Return Type: ``Result b c``
+
+.. wake:function:: def rmapPass fn
+
+	Applies a fallible function to Pass value or propogates Fail
+	(fn: a => Result b c) => Result a c => Result b c
+	
+
+	Parameters: ``fn: a,  Result b c,  Result a c``
+
+	Return Type: ``Result b c``
+
+.. wake:function:: def rmapFail fn
+
+	Applies a fallible function to Fail value or propogates Pass
+	(fn: a => Result b c) => Result b a => Result b c
+	
+
+	Parameters: ``fn: a,  Result b c,  Result b a``
+
+	Return Type: ``Result b c``
+
+.. wake:function:: def findFail
+
+	Finds the first Fail in a List of Result or aggregates Passes into a List
+	List (Result a b) => Result (List a) b
+	
+
+	Parameters: ``List Result a b``
+
+	Return Type: ``Result (List a) b``
+
+.. wake:function:: def findFailFn fn
+
+	Applies a fallible function to each element of a List,
+	returning the first Fail or aggregates the Passes into a List
+	(fn: a => Result b c) => List a => Result (List b) c
+	
+
+	Parameters: ``fn: a,  Result b c,  List a``
+
+	Return Type: ``Result (List b) c``
+
+.. wake:function:: def findPass
+
+	Finds the first Pass in a List of Result or aggregates Fails into a List
+	List (Result a b) => Result a (List b)
+	
+
+	Parameters: ``List Result a b``
+
+	Return Type: ``Result a (List b)``
+
+.. wake:function:: def findPassFn fn
+
+	Applies a fallible function to each element of a List
+	returning the first Pass or aggregates the Fails into a List
+	(fn: a => Result b c) => List a => Result b (List c)
+	
+
+	Parameters: ``fn: a,  Result b c,  List a``
+
+	Return Type: ``Result b (List c)``
+
+.. wake:function:: def panic s
+
+	No description for this feature yet.
+
+	Parameters: ``s: String``
+
+	Return Type: ``a``
+
+.. wake:function:: def stack s
+
+	No description for this feature yet.
+
+	Parameters: ``s: Unit``
+
+	Return Type: ``List String``
+
+.. wake:tuple:: tuple Error
+
+	No description for this feature yet.
+
+	Parameters: ``Error,  a,  Error``
+
+	Return Type: ``a``
+
+.. wake:function:: def makeError cause
+
+	No description for this feature yet.
+
+	Parameters: ``cause: String``
+
+	Return Type: ``Error``
+
+regexp.wake
+-----------
+.. wake:function:: def quote str
+
+	Turns a String into a properly quoted Regular Expression
+	quote: (str: String) => RegExp
+	
+
+	Parameters: ``str: String``
+
+	Return Type: ``RegExp``
+
+.. wake:function:: def regExpCat l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List RegExp``
+
+	Return Type: ``RegExp``
+
+.. wake:function:: def stringToRegExp str
+
+	(str: String) => RegExp
+	
+
+	Parameters: ``str: String``
+
+	Return Type: ``Result RegExp String``
+
+.. wake:function:: def regExpToString regexp
+
+	No description for this feature yet.
+
+	Parameters: ``regexp: RegExp``
+
+	Return Type: ``String``
+
+.. wake:function:: def matches testRegexp str
+
+	matches: (testRegexp: String) => (str: String) => Boolean
+	
+
+	Parameters: ``testRegexp: RegExp,  str: String``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def extract parensRegexp str
+
+	extract: (parensRegexp: String) => (str: String) => List String
+	returns Nil on no match
+	
+
+	Parameters: ``parensRegexp: RegExp,  str: String``
+
+	Return Type: ``List String``
+
+.. wake:function:: def replace locatorRegexp replacement str
+
+	replace: (locatorRegexp: String) => (replacement: String) => (str: String) => String
+	
+
+	Parameters: ``locatorRegexp: RegExp,  replacement: String,  str: String``
+
+	Return Type: ``String``
+
+.. wake:function:: def tokenize seperatorRegexp str
+
+	tokenize: (seperatorRegexp: String) => (str: String) => List String
+	
+
+	Parameters: ``seperatorRegexp: RegExp,  str: String``
+
+	Return Type: ``List String``
+
+vector.wake
+-----------
+.. wake:function:: def listToVector l
+
+	Converts a ``List`` to a ``Vector``.
+	
+
+	Parameters: ``l: List a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def treeToVector t
+
+	Converts a ``Tree`` to a ``Vector``.
+	
+
+	Parameters: ``t: Tree a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vempty (Vector _ s e)
+
+	Returns ``True`` if the ``Vector`` has no entries, otherwise ``False``.
+	
+
+	Parameters: ``Vector a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def vlen (Vector _ s e)
+
+	Returns the length of the ``Vector``.
+	
+
+	Parameters: ``Vector a``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def vectorToList
+
+	Converts a ``List`` to a ``Vector``.
+	
+
+	Parameters: ``v: Vector a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def vsplitAt i (Vector v s e)
+
+	Splits the ``Vector`` into two vectors, at the point ``i``.
+	The ``i``th entry will end up in the second ``Vector``, provided that ``0 <= i < vlen(v)``.
+	
+
+	Parameters: ``Integer,  Vector a``
+
+	Return Type: ``Pair (Vector a) (Vector a)``
+
+.. wake:function:: def vtake i v
+
+	Returns the first ``i`` elements of the ``Vector``.
+	
+
+	Parameters: ``i: Integer,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vdrop i v
+
+	Removes the first ``i`` elements of the ``Vector``.
+	
+
+	Parameters: ``i: Integer,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vat i (Vector v s e)
+
+	Returns an ``Option``, containing either the ``i``th element of the vector, or ``None`` if ``i`` is out of range.
+	
+
+	Parameters: ``Integer,  Vector a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def vmap f v
+
+	Calls a function on every entry of a ``Vector``.
+	
+
+	Parameters: ``f: a,  b,  v: Vector a``
+
+	Return Type: ``Vector b``
+
+.. wake:function:: def vseq n
+
+	No description for this feature yet.
+
+	Parameters: ``n: Integer``
+
+	Return Type: ``Vector Integer``
+
+.. wake:function:: def vzip a b
+
+	No description for this feature yet.
+
+	Parameters: ``a: Vector a,  b: Vector b``
+
+	Return Type: ``Vector (Pair a b)``
+
+.. wake:function:: def vunzip v
+
+	No description for this feature yet.
+
+	Parameters: ``v: Vector Pair a b``
+
+	Return Type: ``Pair (Vector a) (Vector b)``
+
+.. wake:function:: def vreverse v
+
+	No description for this feature yet.
+
+	Parameters: ``v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vfoldl f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  a,  a: a,  v: Vector b``
+
+	Return Type: ``a``
+
+.. wake:function:: def vfoldr f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  b,  a: b,  v: Vector a``
+
+	Return Type: ``b``
+
+.. wake:function:: def vfoldmap f a g v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  a,  a,  a: a,  g: b,  a,  v: Vector b``
+
+	Return Type: ``a``
+
+.. wake:function:: def vfold f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  a,  a,  a: a,  v: Vector a``
+
+	Return Type: ``a``
+
+.. wake:function:: def vfind f v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  v: Vector a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def vsplitUntil f v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  v: Vector a``
+
+	Return Type: ``Pair (Vector a) (Vector a)``
+
+.. wake:function:: def vtakeUntil f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vdropUntil f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vexists f t
+
+	Returns True if there exists an x where f x = True
+	
+
+	Parameters: ``f: a,  Boolean,  t: Vector a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def vforall f t
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  t: Vector a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def vsplitBy f v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  v: Vector a``
+
+	Return Type: ``Pair (Vector a) (Vector a)``
+
+.. wake:function:: def vfilter f v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vunfoldl f a n
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Pair a b,  a: a,  n: Integer``
+
+	Return Type: ``Vector b``
+
+.. wake:function:: def vscanl f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  a,  a: a,  v: Vector b``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vscanr f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  b,  a: b,  v: Vector a``
+
+	Return Type: ``Vector b``
+
+.. wake:function:: def vscanmap f a g v
+
+	vscan = O(n), log n deep prefix-sum
+	f called exactly once per input
+	
+
+	Parameters: ``f: a,  a,  a,  a: a,  g: b,  a,  v: Vector b``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vscan f a v
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  a,  a,  a: a,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vsortBy lt v
+
+	Merge-sort, if sorted then O(n) else O(nlogn)
+	
+
+	Parameters: ``lt: a,  a,  Boolean,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vdistinctBy cmp v
+
+	No description for this feature yet.
+
+	Parameters: ``cmp: a,  a,  Order,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vdistinctRunBy eq v
+
+	No description for this feature yet.
+
+	Parameters: ``eq: a,  a,  Boolean,  v: Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vcmp f l r
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  Order,  l: Vector a,  r: Vector b``
+
+	Return Type: ``Order``
+
+.. wake:function:: def vtranspose v
+
+	No description for this feature yet.
+
+	Parameters: ``v: Vector Vector a``
+
+	Return Type: ``Vector (Vector a)``
+
+.. wake:function:: def vflatten vo
+
+	No description for this feature yet.
+
+	Parameters: ``vo: Vector Vector a``
+
+	Return Type: ``Vector a``
+
+.. wake:function:: def vtab f n
+
+	Simple parallel construction
+	
+
+	Parameters: ``f: Integer,  a,  n: Integer``
+
+	Return Type: ``Vector a``
+
+list.wake
+---------
+.. wake:data:: data List a
+
+	Constructs a List object.
+	
+
+.. wake:function:: def empty
+
+	Returns True if the list contains no elements, otherwise False.
+	
+
+	Parameters: ``List a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def head
+
+	Returns the first element of the list.
+	
+
+	Parameters: ``List a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def tail
+
+	Returns a list of all elements, starting from the second.
+	
+
+	Parameters: ``List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def map f
+
+	Applies a function f to each element of the list.
+	
+
+	Parameters: ``f: a,  b,  List a``
+
+	Return Type: ``List b``
+
+.. wake:function:: def mapFlat f
+
+	Applies a function to each element of the List and builds a new List from the resulting elements
+	(f: a => List b) => List a => List b
+	
+
+	Parameters: ``f: a,  List b,  List a``
+
+	Return Type: ``List b``
+
+.. wake:function:: def mapPartial f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Option b,  List a``
+
+	Return Type: ``List b``
+
+.. wake:function:: def foldl f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  a,  a: a,  List b``
+
+	Return Type: ``a``
+
+.. wake:function:: def scanl f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  a,  a: a,  List b``
+
+	Return Type: ``List a``
+
+.. wake:function:: def foldr f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  b,  a: b,  List a``
+
+	Return Type: ``b``
+
+.. wake:function:: def scanr f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  b,  b,  List a``
+
+	Return Type: ``List b``
+
+.. wake:function:: def l ++ r
+
+	No description for this feature yet.
+
+	Parameters: ``l: List a,  r: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def reverse
+
+	No description for this feature yet.
+
+	Parameters: ``List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def flatten
+
+	No description for this feature yet.
+
+	Parameters: ``List List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def len
+
+	No description for this feature yet.
+
+	Parameters: ``List a``
+
+	Return Type: ``Integer``
+
+.. wake:function:: def splitAt i l
+
+	list choppers
+	
+
+	Parameters: ``i: Integer,  l: List a``
+
+	Return Type: ``Pair (List a) (List a)``
+
+.. wake:function:: def take i l
+
+	No description for this feature yet.
+
+	Parameters: ``i: Integer,  l: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def drop i l
+
+	No description for this feature yet.
+
+	Parameters: ``i: Integer,  l: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def at i l
+
+	No description for this feature yet.
+
+	Parameters: ``i: Integer,  l: List a``
+
+	Return Type: ``Option a``
+
+.. wake:function:: def splitUntil f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  l: List a``
+
+	Return Type: ``Pair (List a) (List a)``
+
+.. wake:function:: def takeUntil f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def dropUntil f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  l: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def find f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  List a``
+
+	Return Type: ``Option (Pair a Integer)``
+
+.. wake:function:: def exists f l
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  l: List a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def forall f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  List a``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def splitBy f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  List a``
+
+	Return Type: ``Pair (List a) (List a)``
+
+.. wake:function:: def filter f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  Boolean,  List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def transpose l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List List a``
+
+	Return Type: ``List (List a)``
+
+.. wake:function:: def sortBy f l
+
+	f should be a less-than comparison
+	
+
+	Parameters: ``f: a,  a,  Boolean,  l: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def distinctBy cmp
+
+	keep only the first occurrence of a value
+	
+
+	Parameters: ``cmp: a,  a,  Order,  List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def distinctRunBy f l
+
+	f should be an equality comparison
+	keep only the first occurrence in a run of equal values
+	
+
+	Parameters: ``f: a,  a,  Boolean,  l: List a``
+
+	Return Type: ``List a``
+
+.. wake:function:: def cmp f
+
+	No description for this feature yet.
+
+	Parameters: ``f: a,  b,  Order,  List a,  List b``
+
+	Return Type: ``Order``
+
+.. wake:function:: def tab f
+
+	No description for this feature yet.
+
+	Parameters: ``f: Integer,  a,  n: Integer``
+
+	Return Type: ``List a``
+
+.. wake:function:: def seq
+
+	No description for this feature yet.
+
+	Parameters: ``n: Integer``
+
+	Return Type: ``List Integer``
+
+.. wake:function:: def zip
+
+	No description for this feature yet.
+
+	Parameters: ``List a,  List b``
+
+	Return Type: ``List (Pair a b)``
+
+.. wake:function:: def unzip
+
+	No description for this feature yet.
+
+	Parameters: ``List Pair a b``
+
+	Return Type: ``Pair (List a) (List b)``
+
+json.wake
+---------
+.. wake:data:: data JValue
+
+	The JSON data type
+	
+
+.. wake:function:: def getJString
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option String``
+
+.. wake:function:: def getJInteger
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option Integer``
+
+.. wake:function:: def getJDouble
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option Double``
+
+.. wake:function:: def getJBoolean
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option Boolean``
+
+.. wake:function:: def getJObject
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option (List (Pair String JValue))``
+
+.. wake:function:: def getJArray
+
+	No description for this feature yet.
+
+	Parameters: ``JValue``
+
+	Return Type: ``Option (List JValue)``
+
+.. wake:function:: def parseJSONBody body
+
+	No description for this feature yet.
+
+	Parameters: ``body: String``
+
+	Return Type: ``Result JValue Error``
+
+.. wake:function:: def parseJSONFile path
+
+	No description for this feature yet.
+
+	Parameters: ``path: Path``
+
+	Return Type: ``Result JValue Error``
+
+.. wake:function:: def jsonEscape str
+
+	No description for this feature yet.
+
+	Parameters: ``str: String``
+
+	Return Type: ``String``
+
+.. wake:function:: def prettyJSONFormat
+
+	No description for this feature yet.
+
+	Parameters: None
+
+	Return Type: ``JSONFormat``
+
+.. wake:function:: def customFormatJSON fmt body
+
+	No description for this feature yet.
+
+	Parameters: ``fmt: JSONFormat,  body: JValue``
+
+	Return Type: ``String``
+
+.. wake:function:: def formatJSON
+
+	No description for this feature yet.
+
+	Parameters: ``body: JValue``
+
+	Return Type: ``String``
+
+.. wake:function:: def prettyJSON
+
+	No description for this feature yet.
+
+	Parameters: ``body: JValue``
+
+	Return Type: ``String``
+
+.. wake:function:: def root /| filterFn
+
+	No description for this feature yet.
+
+	Parameters: ``root: JValue,  filterFn: JValue,  Boolean``
+
+	Return Type: ``JValue``
+
+.. wake:function:: def jfilter filterFn root
+
+	No description for this feature yet.
+
+	Parameters: ``filterFn: JValue,  Boolean,  root: JValue``
+
+	Return Type: ``JValue``
+
+.. wake:function:: def root /../ filterFn
+
+	No description for this feature yet.
+
+	Parameters: ``root: JValue,  filterFn: JValue,  Boolean``
+
+	Return Type: ``JValue``
+
+.. wake:function:: def jfind filterFn root
+
+	No description for this feature yet.
+
+	Parameters: ``filterFn: JValue,  Boolean,  root: JValue``
+
+	Return Type: ``JValue``
+
+.. wake:function:: def jempty root
+
+	No description for this feature yet.
+
+	Parameters: ``root: JValue``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def jlist root
+
+	No description for this feature yet.
+
+	Parameters: ``root: JValue``
+
+	Return Type: ``List JValue``
+
+.. wake:function:: def x // y
+
+	No description for this feature yet.
+
+	Parameters: ``x: JValue,  y: RegExp``
+
+	Return Type: ``JValue``
+
+.. wake:function:: def x ==/ y
+
+	No description for this feature yet.
+
+	Parameters: ``x: JValue,  y: JValue``
+
+	Return Type: ``Boolean``
+
+boolean.wake
+------------
+.. wake:data:: data Boolean
+
+	Boolean type has two values: True and False.
+	
+
+.. wake:function:: def !x
+
+	Unary operator for NOT.
+	
+
+	Parameters: ``x: Boolean``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x && y
+
+	Binary operator for AND.
+	
+
+	Parameters: ``x: Boolean,  y: Boolean``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x || y
+
+	Binary operator for OR.
+	
+
+	Parameters: ``x: Boolean,  y: Boolean``
+
+	Return Type: ``Boolean``
+
+print.wake
+----------
+.. wake:function:: def format any
+
+	Any => String conversion
+	
+
+	Parameters: ``any: a``
+
+	Return Type: ``String``
+
+.. wake:data:: data LogLevel
+
+	These values often come from the wake command-line
+	default => Normal
+	-d      => Normal
+	-q      => Quiet
+	-v      => Verbose
+	-dv     => Debug
+	
+
+.. wake:data:: data EchoTarget
+
+	No description for this feature yet.
+
+.. wake:function:: def logError
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def logWarn
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def logNormal
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def logVerbose
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def logDebug
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def logNever
+
+	No description for this feature yet.
+
+	Parameters: ``LogLevel``
+
+	Return Type: ``EchoTarget``
+
+.. wake:function:: def tap consumerFn value
+
+	Useful helper method for inserting a debug step into a pipeline
+	def foo = "123123" | tap ("that: {_}") | int | getOrElse 0
+	
+
+	Parameters: ``consumerFn: a,  b,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapLevel level formatFn value
+
+	Print the tap output to the console
+	
+
+	Parameters: ``level: LogLevel,  EchoTarget,  formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapError
+
+	No description for this feature yet.
+
+	Parameters: ``formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapWarn
+
+	No description for this feature yet.
+
+	Parameters: ``formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapNormal
+
+	No description for this feature yet.
+
+	Parameters: ``formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapVerbose
+
+	No description for this feature yet.
+
+	Parameters: ``formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def tapDebug
+
+	No description for this feature yet.
+
+	Parameters: ``formatFn: a,  String,  value: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def printLevel logLevelFn
+
+	Print with a given verbosity
+	
+
+	Parameters: ``logLevelFn: LogLevel,  EchoTarget,  outputStr: String``
+
+	Return Type: ``Unit``
+
+.. wake:function:: def printlnLevel logLevelFn
+
+	No description for this feature yet.
+
+	Parameters: ``logLevelFn: LogLevel,  EchoTarget,  outputStr: String``
+
+	Return Type: ``Unit``
+
+.. wake:function:: def print
+
+	Print any type to stdout; even exceptions
+	
+
+	Parameters: ``outputStr: String``
+
+	Return Type: ``Unit``
+
+.. wake:function:: def println
+
+	No description for this feature yet.
+
+	Parameters: ``outputStr: String``
+
+	Return Type: ``Unit``
+
+double.wake
+-----------
+.. wake:function:: def dabs x
+
+	Unary absolute value operator for a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def   -. x
+
+	Unary negative sign for a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def   +. x
+
+	Unary positive sign for a Double.
+	
+
+	Parameters: ``x: a``
+
+	Return Type: ``a``
+
+.. wake:function:: def x +. y
+
+	Binary addition operator for Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def x -. y
+
+	Binary subtraction operator for Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def x *. y
+
+	Binary multiplication operator for Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def x /. y
+
+	Binary division operator for Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def x ^. y
+
+	Binary exponentiation operator for Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dfma x y z
+
+	Computes x*y + z.
+	
+
+	Parameters: ``x: Double,  y: Double,  z: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def droot n
+
+	Creates a function that computes the nth root.
+	
+
+	Parameters: ``n: Double,  Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dsqrt
+
+	Unary operator for square root.
+	
+
+	Parameters: ``Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def √ x
+
+	Unary operator for square root, using the unicode character.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def ∛ x
+
+	Unary operator for cube root.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def ∜ x
+
+	Unary operator for fourth root.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dcmp x y
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <=>. y
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Order``
+
+.. wake:function:: def x <.  y
+
+	Binary Less-Than Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >.  y
+
+	Binary Greater-Than Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x >=. y
+
+	Binary Greater-Or-Equal Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x <=. y
+
+	Binary Less-Or-Equal Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x ==. y
+
+	Binary Equal-To Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def x !=. y
+
+	Binary Not-Equal Operator.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Boolean``
+
+.. wake:function:: def dmin x y
+
+	Computes the minimum of two Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dmax x y
+
+	Computes the maximum of two Doubles.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dprod
+
+	Product of a series of Doubles.
+	
+
+	Parameters: ``List Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def ∏. l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dsum
+
+	Sum of a series of Doubles.
+	
+
+	Parameters: ``List Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def ∑. l
+
+	No description for this feature yet.
+
+	Parameters: ``l: List Double``
+
+	Return Type: ``Double``
+
+.. wake:data:: data DoubleFormat
+
+	No description for this feature yet.
+
+.. wake:function:: def dformat x
+
+	No description for this feature yet.
+
+	Parameters: ``x: DoubleFormat,  p: Integer,  x: Double``
+
+	Return Type: ``String``
+
+.. wake:function:: def double s
+
+	No description for this feature yet.
+
+	Parameters: ``s: String``
+
+	Return Type: ``Option Double``
+
+.. wake:function:: def dhex
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``String``
+
+.. wake:function:: def dstr
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``String``
+
+.. wake:function:: def dint x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Integer``
+
+	Return Type: ``Option Double``
+
+.. wake:data:: data DoubleClass
+
+	Conversion methods
+	
+
+.. wake:function:: def dclass x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``DoubleClass``
+
+.. wake:function:: def dfrexp x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Pair Double Integer``
+
+.. wake:function:: def dldexp f e
+
+	No description for this feature yet.
+
+	Parameters: ``f: Double,  e: Integer``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dmodf  x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Pair Integer Double``
+
+.. wake:function:: def idouble x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Option Integer``
+
+.. wake:function:: def dcos    x
+
+	Calculates the cosine of a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dsin    x
+
+	Calculates the sine of a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dtan    x
+
+	Calculates the tangent of a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dacos   x
+
+	Calculates the inverse cosine of a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dasin   x
+
+	Calculates the inverse sine of a Double.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dexp    x
+
+	Calculates e^x.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dlog    x
+
+	Calculates the natural logarithm of x.
+	
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dexpm1  x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dlog1p  x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def derf    x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def derfc   x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dtgamma x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def dlgamma x
+
+	No description for this feature yet.
+
+	Parameters: ``x: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def datan x y
+
+	Calculates the inverse tangent of y/x, giving the angle of the point(x, y) in the coordinate plane.
+	
+
+	Parameters: ``x: Double,  y: Double``
+
+	Return Type: ``Double``
+
+.. wake:function:: def nan
+
+	Not a Number
+	
+
+	Parameters: None
+
+	Return Type: ``Double``
+
+.. wake:function:: def inf
+
+	Infinity
+	
+
+	Parameters: None
+
+	Return Type: ``Double``
+
+.. wake:function:: def pi
+
+	Pi
+	
+
+	Parameters: None
+
+	Return Type: ``Double``
+

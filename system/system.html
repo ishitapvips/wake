@@ -1,0 +1,785 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>system &#8212; wake-manual  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="wake-manual  documentation" href="../contents.html" />
+    <link rel="up" title="&lt;no title&gt;" href="../lib.html" />
+    <link rel="next" title="core" href="../core/core.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../lib.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="system">
+<h1>system<a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="job-wake">
+<h2>job.wake<a class="headerlink" href="#job-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def getUsageThreads (Usage _ run cpu _ _ _)">
+<code class="descname">def getUsageThreads (Usage _ run cpu _ _ _)</code><a class="headerlink" href="#function-def getUsageThreads (Usage _ run cpu _ _ _)" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">Usage</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Double</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeRunner name score pre post (Runner _ _ run)">
+<code class="descname">def makeRunner name score pre post (Runner _ _ run)</code><a class="headerlink" href="#function-def makeRunner name score pre post (Runner _ _ run)" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">String,</span>&#160; <span class="pre">Plan,</span>&#160; <span class="pre">Result</span> <span class="pre">Double</span> <span class="pre">String,</span>&#160; <span class="pre">Result</span> <span class="pre">RunnerInput</span> <span class="pre">Error,</span>&#160; <span class="pre">Pair</span> <span class="pre">Result</span> <span class="pre">RunnerInput</span> <span class="pre">Error</span> <span class="pre">a,</span>&#160; <span class="pre">Pair</span> <span class="pre">Result</span> <span class="pre">RunnerOutput</span> <span class="pre">Error</span> <span class="pre">a,</span>&#160; <span class="pre">Result</span> <span class="pre">RunnerOutput</span> <span class="pre">Error,</span>&#160; <span class="pre">Runner</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Runner</span></code></p>
+</dd></dl>
+
+<dl class="data">
+<dt id="function-data Persistence">
+<code class="descname">data Persistence</code><a class="headerlink" href="#function-data Persistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPlanOnce  p">
+<code class="descname">def getPlanOnce  p</code><a class="headerlink" href="#function-def getPlanOnce  p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience accessor methods</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Boolean</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPlanKeep  p">
+<code class="descname">def getPlanKeep  p</code><a class="headerlink" href="#function-def getPlanKeep  p" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Boolean</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPlanShare p">
+<code class="descname">def getPlanShare p</code><a class="headerlink" href="#function-def getPlanShare p" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Boolean</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def setPlanOnce  v p">
+<code class="descname">def setPlanOnce  v p</code><a class="headerlink" href="#function-def setPlanOnce  v p" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">v:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def setPlanKeep  v p">
+<code class="descname">def setPlanKeep  v p</code><a class="headerlink" href="#function-def setPlanKeep  v p" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">v:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def setPlanShare v p">
+<code class="descname">def setPlanShare v p</code><a class="headerlink" href="#function-def setPlanShare v p" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">v:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def editPlanOnce f">
+<code class="descname">def editPlanOnce f</code><a class="headerlink" href="#function-def editPlanOnce f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper methods that maintain the invariant that: Share =&gt; Keep =&gt; Once</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">f:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">Boolean,</span>&#160; <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def editPlanKeep f">
+<code class="descname">def editPlanKeep f</code><a class="headerlink" href="#function-def editPlanKeep f" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">f:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">Boolean,</span>&#160; <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def editPlanShare f">
+<code class="descname">def editPlanShare f</code><a class="headerlink" href="#function-def editPlanShare f" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">f:</span> <span class="pre">Boolean,</span>&#160; <span class="pre">Boolean,</span>&#160; <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPlanHash plan">
+<code class="descname">def getPlanHash plan</code><a class="headerlink" href="#function-def getPlanHash plan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a unique hash-code for the job</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">plan:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Integer</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makePlan cmd visible">
+<code class="descname">def makePlan cmd visible</code><a class="headerlink" href="#function-def makePlan cmd visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">cmd:</span> <span class="pre">List</span> <span class="pre">String,</span>&#160; <span class="pre">visible:</span> <span class="pre">List</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeShellPlan script visible">
+<code class="descname">def makeShellPlan script visible</code><a class="headerlink" href="#function-def makeShellPlan script visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">script:</span> <span class="pre">String,</span>&#160; <span class="pre">visible:</span> <span class="pre">List</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Plan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def runJobWith (Runner _ _ run) (Plan cmd vis env dir stdin stdout stderr echo pers _ res _ usage finputs foutputs)">
+<code class="descname">def runJobWith (Runner _ _ run) (Plan cmd vis env dir stdin stdout stderr echo pers _ res _ usage finputs foutputs)</code><a class="headerlink" href="#function-def runJobWith (Runner _ _ run) (Plan cmd vis env dir stdin stdout stderr echo pers _ res _ usage finputs foutputs)" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">Runner,</span>&#160; <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Job</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def runJob p">
+<code class="descname">def runJob p</code><a class="headerlink" href="#function-def runJob p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the job!</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">p:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Job</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobReport job">
+<code class="descname">def getJobReport job</code><a class="headerlink" href="#function-def getJobReport job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Actual usage of a finished job</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Result</span> <span class="pre">Usage</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobRecord job">
+<code class="descname">def getJobRecord job</code><a class="headerlink" href="#function-def getJobRecord job" title="Permalink to this definition">¶</a></dt>
+<dd><p>From database, available the moment a Job exists</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Option</span> <span class="pre">Usage</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeBadPath error">
+<code class="descname">def makeBadPath error</code><a class="headerlink" href="#function-def makeBadPath error" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">error:</span> <span class="pre">Error</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def killJob job signal">
+<code class="descname">def killJob job signal</code><a class="headerlink" href="#function-def killJob job signal" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job,</span>&#160; <span class="pre">signal:</span> <span class="pre">Integer</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Unit</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobStdout  job">
+<code class="descname">def getJobStdout  job</code><a class="headerlink" href="#function-def getJobStdout  job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Result</span> <span class="pre">String</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobStderr  job">
+<code class="descname">def getJobStderr  job</code><a class="headerlink" href="#function-def getJobStderr  job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Result</span> <span class="pre">String</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobInputs  job">
+<code class="descname">def getJobInputs  job</code><a class="headerlink" href="#function-def getJobInputs  job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobOutputs job">
+<code class="descname">def getJobOutputs job</code><a class="headerlink" href="#function-def getJobOutputs job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobFailedInputs  job">
+<code class="descname">def getJobFailedInputs  job</code><a class="headerlink" href="#function-def getJobFailedInputs  job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobFailedOutputs job">
+<code class="descname">def getJobFailedOutputs job</code><a class="headerlink" href="#function-def getJobFailedOutputs job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobId job">
+<code class="descname">def getJobId job</code><a class="headerlink" href="#function-def getJobId job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Integer</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobDescription job">
+<code class="descname">def getJobDescription job</code><a class="headerlink" href="#function-def getJobDescription job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobOutput job">
+<code class="descname">def getJobOutput job</code><a class="headerlink" href="#function-def getJobOutput job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def isJobOk job">
+<code class="descname">def isJobOk job</code><a class="headerlink" href="#function-def isJobOk job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Boolean</span></code></p>
+</dd></dl>
+
+<dl class="data">
+<dt id="function-data Status">
+<code class="descname">data Status</code><a class="headerlink" href="#function-data Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getJobStatus job">
+<code class="descname">def getJobStatus job</code><a class="headerlink" href="#function-def getJobStatus job" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">job:</span> <span class="pre">Job</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Status</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def defaultRunner">
+<code class="descname">def defaultRunner</code><a class="headerlink" href="#function-def defaultRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Runner</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeJSONRunnerPlan rawScript score">
+<code class="descname">def makeJSONRunnerPlan rawScript score</code><a class="headerlink" href="#function-def makeJSONRunnerPlan rawScript score" title="Permalink to this definition">¶</a></dt>
+<dd><p>make a <code class="docutils literal"><span class="pre">JSONRunnerPlan</span></code> with <code class="docutils literal"><span class="pre">Nil</span></code> and <code class="docutils literal"><span class="pre">(_)</span></code> as defaults for <code class="docutils literal"><span class="pre">ExtraArgs</span></code> and <code class="docutils literal"><span class="pre">Estimate</span></code> respectively
+rawScript: String; the path to the script to run jobs with
+score: Plan =&gt; Double; runJob chooses the runner with the largest score for a Plan</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">rawScript:</span> <span class="pre">String,</span>&#160; <span class="pre">score:</span> <span class="pre">Plan,</span>&#160; <span class="pre">Result</span> <span class="pre">Double</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">JSONRunnerPlan</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeJSONRunner plan">
+<code class="descname">def makeJSONRunner plan</code><a class="headerlink" href="#function-def makeJSONRunner plan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a Runner that runs a named script to run jobs
+plan: JSONRunnerPlan; a tuple containing the arguments for this function</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">plan:</span> <span class="pre">JSONRunnerPlan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Runner</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPathResult path">
+<code class="descname">def getPathResult path</code><a class="headerlink" href="#function-def getPathResult path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Result</span> <span class="pre">Path</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPathError path">
+<code class="descname">def getPathError path</code><a class="headerlink" href="#function-def getPathError path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Option</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPathName path">
+<code class="descname">def getPathName path</code><a class="headerlink" href="#function-def getPathName path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPathChild path">
+<code class="descname">def getPathChild path</code><a class="headerlink" href="#function-def getPathChild path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getPathParent path">
+<code class="descname">def getPathParent path</code><a class="headerlink" href="#function-def getPathParent path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def job cmd visible">
+<code class="descname">def job cmd visible</code><a class="headerlink" href="#function-def job cmd visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whenever possible, use &#8216;job&#8217; if:
+cmd can run under FUSE
+cmd guarantees to produce the same outputs given the same inputs
+Examples:
+gcc
+job only allows cmd access to &#8216;visible&#8217;, to prevent undeclared dependencies.
+If you miss declared visible inputs, your build will fail so you can fix it.
+If you declare too many visible inputs, cmd execution/replay will wait for unnecessary files.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">cmd:</span> <span class="pre">List</span> <span class="pre">String,</span>&#160; <span class="pre">visible:</span> <span class="pre">List</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Job</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def shellJob script visible">
+<code class="descname">def shellJob script visible</code><a class="headerlink" href="#function-def shellJob script visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">script:</span> <span class="pre">String,</span>&#160; <span class="pre">visible:</span> <span class="pre">List</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Job</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="cp-wake">
+<h2>cp.wake<a class="headerlink" href="#cp-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def installAs dest file">
+<code class="descname">def installAs dest file</code><a class="headerlink" href="#function-def installAs dest file" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">dest:</span> <span class="pre">String,</span>&#160; <span class="pre">file:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def installIn dir file">
+<code class="descname">def installIn dir file</code><a class="headerlink" href="#function-def installIn dir file" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">dir:</span> <span class="pre">String,</span>&#160; <span class="pre">file:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="environment-wake">
+<h2>environment.wake<a class="headerlink" href="#environment-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def sysname">
+<code class="descname">def sysname</code><a class="headerlink" href="#function-def sysname" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def machine">
+<code class="descname">def machine</code><a class="headerlink" href="#function-def machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def path">
+<code class="descname">def path</code><a class="headerlink" href="#function-def path" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def environment">
+<code class="descname">def environment</code><a class="headerlink" href="#function-def environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getenv key">
+<code class="descname">def getenv key</code><a class="headerlink" href="#function-def getenv key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use of this function can lead to unnecessary rebuilds!</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">key:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Option</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def getEnvironment key environment">
+<code class="descname">def getEnvironment key environment</code><a class="headerlink" href="#function-def getEnvironment key environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the value for &#8216;key&#8217; from a KEY=VALUE environment list
+(key: String) =&gt; (environment: List String) =&gt; Option String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">key:</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Option</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def unsetEnvironment key environment">
+<code class="descname">def unsetEnvironment key environment</code><a class="headerlink" href="#function-def unsetEnvironment key environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a key from a KEY=VALUE environment list
+(key: String) =&gt; (environment: List String) =&gt; List String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">key:</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def setEnvironment key value environment">
+<code class="descname">def setEnvironment key value environment</code><a class="headerlink" href="#function-def setEnvironment key value environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set key=value in an environment list, removing all prior values for that key
+(key: String) =&gt; (value: String) =&gt; (environment: List String) =&gt; List String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">key:</span> <span class="pre">String,</span>&#160; <span class="pre">value:</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def editEnvironment key fn environment">
+<code class="descname">def editEnvironment key fn environment</code><a class="headerlink" href="#function-def editEnvironment key fn environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a key&#8217;s value in a KEY=VALUE environment list
+All prior values for that key are rmeoved
+Only the first match (if any) is supplied to fn
+(key: String) =&gt; (fn: Option String =&gt; Option String) =&gt; (environment: List String) =&gt; List String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">key:</span> <span class="pre">String,</span>&#160; <span class="pre">fn:</span> <span class="pre">Option</span> <span class="pre">String,</span>&#160; <span class="pre">Option</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def addEnvironmentPath path environment">
+<code class="descname">def addEnvironmentPath path environment</code><a class="headerlink" href="#function-def addEnvironmentPath path environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a component to the PATH in a KEY=VALUE environment
+(path: String) =&gt; (environment: List String) =&gt; List String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def addEnvironmentPathOpt pathopt environment">
+<code class="descname">def addEnvironmentPathOpt pathopt environment</code><a class="headerlink" href="#function-def addEnvironmentPathOpt pathopt environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optionally add a component to the PATH in a KEY=VALUE environment
+(pathopt: Option String) =&gt; (environment: List String) =&gt; List String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">pathopt:</span> <span class="pre">Option</span> <span class="pre">String,</span>&#160; <span class="pre">environment:</span> <span class="pre">List</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="os-wake">
+<h2>os.wake<a class="headerlink" href="#os-wake" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="incremental-wake">
+<h2>incremental.wake<a class="headerlink" href="#incremental-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def claimFileAsPath existingFile desiredWorkspacePath">
+<code class="descname">def claimFileAsPath existingFile desiredWorkspacePath</code><a class="headerlink" href="#function-def claimFileAsPath existingFile desiredWorkspacePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>This API makes it possible to include a non-source file into a wake build.
+Generally, one should obtain Paths from sources or as the output of Jobs.
+This API is useful for things like a comannd-line-supplied input file.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">existingFile:</span> <span class="pre">String,</span>&#160; <span class="pre">desiredWorkspacePath:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def runIncrementalJob stateFileLabel reusedOutputFilterFn plan">
+<code class="descname">def runIncrementalJob stateFileLabel reusedOutputFilterFn plan</code><a class="headerlink" href="#function-def runIncrementalJob stateFileLabel reusedOutputFilterFn plan" title="Permalink to this definition">¶</a></dt>
+<dd><p>This API allows a Job to access those outputs from its last invocation
+which are accepted by reusedOutputFilterFn. To use this method, you must
+guarantee that all output contents will be the same whether or not the
+previous outputs were made available or not. Also, for incremental jobs,
+all visible files are considered as inputs, since the job might not read
+all inputs on each run, based on (for example) timestamps.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">stateFileLabel:</span> <span class="pre">String,</span>&#160; <span class="pre">reusedOutputFilterFn:</span> <span class="pre">Path,</span>&#160; <span class="pre">Boolean,</span>&#160; <span class="pre">plan:</span> <span class="pre">Plan</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Job</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="sources-wake">
+<h2>sources.wake<a class="headerlink" href="#sources-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def files dir regexp">
+<code class="descname">def files dir regexp</code><a class="headerlink" href="#function-def files dir regexp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find files
+WARNING! Use of this method can make a build unreproducible
+Depending on when the method is invoked, the results may vary</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">dir:</span> <span class="pre">String,</span>&#160; <span class="pre">regexp:</span> <span class="pre">RegExp</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def source file">
+<code class="descname">def source file</code><a class="headerlink" href="#function-def source file" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">file:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def sources dir filterRegexp">
+<code class="descname">def sources dir filterRegexp</code><a class="headerlink" href="#function-def sources dir filterRegexp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find sources files</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">dir:</span> <span class="pre">String,</span>&#160; <span class="pre">filterRegexp:</span> <span class="pre">RegExp</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">List</span> <span class="pre">Path</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="pkgconfig-wake">
+<h2>pkgconfig.wake<a class="headerlink" href="#pkgconfig-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="tuple">
+<dt id="function-tuple SysLib">
+<code class="descname">tuple SysLib</code><a class="headerlink" href="#function-tuple SysLib" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">SysLib,</span>&#160; <span class="pre">a,</span>&#160; <span class="pre">SysLib</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">a</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def makeSysLib version">
+<code class="descname">def makeSysLib version</code><a class="headerlink" href="#function-def makeSysLib version" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">version:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">SysLib</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def flattenSysLibs packages">
+<code class="descname">def flattenSysLibs packages</code><a class="headerlink" href="#function-def flattenSysLibs packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">packages:</span> <span class="pre">List</span> <span class="pre">SysLib</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">SysLib</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def pkgConfig pkg">
+<code class="descname">def pkgConfig pkg</code><a class="headerlink" href="#function-def pkgConfig pkg" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">pkg:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Option</span> <span class="pre">SysLib</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="path-wake">
+<h2>path.wake<a class="headerlink" href="#path-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def read path">
+<code class="descname">def read path</code><a class="headerlink" href="#function-def read path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the file contents of a Path</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Result</span> <span class="pre">String</span> <span class="pre">Error</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def simplify path">
+<code class="descname">def simplify path</code><a class="headerlink" href="#function-def simplify path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplify away the ..s and .s in a String</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def relative dir path">
+<code class="descname">def relative dir path</code><a class="headerlink" href="#function-def relative dir path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reframe path into a form accesible relative to dir</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">dir:</span> <span class="pre">String,</span>&#160; <span class="pre">path:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="data">
+<dt id="function-target whichIn path exec">
+<code class="descname">target whichIn path exec</code><a class="headerlink" href="#function-target whichIn path exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate an executable in the search path</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def which exec">
+<code class="descname">def which exec</code><a class="headerlink" href="#function-def which exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">exec:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def workspace">
+<code class="descname">def workspace</code><a class="headerlink" href="#function-def workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: None</p>
+<p>Return Type: <code class="docutils literal"><span class="pre">String</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def mkdirIn parent mode name">
+<code class="descname">def mkdirIn parent mode name</code><a class="headerlink" href="#function-def mkdirIn parent mode name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a directory in the parent</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">parent:</span> <span class="pre">Path,</span>&#160; <span class="pre">mode:</span> <span class="pre">Integer,</span>&#160; <span class="pre">name:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def mkdir path">
+<code class="descname">def mkdir path</code><a class="headerlink" href="#function-def mkdir path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all every element in the directory path with mode 0775</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def writeIn parent mode name content">
+<code class="descname">def writeIn parent mode name content</code><a class="headerlink" href="#function-def writeIn parent mode name content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a file with the given mode in the specified directory</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">parent:</span> <span class="pre">Path,</span>&#160; <span class="pre">mode:</span> <span class="pre">Integer,</span>&#160; <span class="pre">name:</span> <span class="pre">String,</span>&#160; <span class="pre">content:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def write path content">
+<code class="descname">def write path content</code><a class="headerlink" href="#function-def write path content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create all directories and the named file</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">path:</span> <span class="pre">String,</span>&#160; <span class="pre">content:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="gcc-wake">
+<h2>gcc.wake<a class="headerlink" href="#gcc-wake" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function-def compileC variant">
+<code class="descname">def compileC variant</code><a class="headerlink" href="#function-def compileC variant" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">variant:</span> <span class="pre">String,</span>&#160; <span class="pre">extraFlags:</span> <span class="pre">List</span> <span class="pre">String,</span>&#160; <span class="pre">headers:</span> <span class="pre">List</span> <span class="pre">Path,</span>&#160; <span class="pre">cfile:</span> <span class="pre">Path</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="function-def linkO    variant">
+<code class="descname">def linkO    variant</code><a class="headerlink" href="#function-def linkO    variant" title="Permalink to this definition">¶</a></dt>
+<dd><p>No description for this feature yet.</p>
+<p>Parameters: <code class="docutils literal"><span class="pre">variant:</span> <span class="pre">String,</span>&#160; <span class="pre">extraFlags:</span> <span class="pre">List</span> <span class="pre">String,</span>&#160; <span class="pre">objects:</span> <span class="pre">List</span> <span class="pre">Path,</span>&#160; <span class="pre">targ:</span> <span class="pre">String</span></code></p>
+<p>Return Type: <code class="docutils literal"><span class="pre">Path</span></code></p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">system</a><ul>
+<li><a class="reference internal" href="#job-wake">job.wake</a></li>
+<li><a class="reference internal" href="#cp-wake">cp.wake</a></li>
+<li><a class="reference internal" href="#environment-wake">environment.wake</a></li>
+<li><a class="reference internal" href="#os-wake">os.wake</a></li>
+<li><a class="reference internal" href="#incremental-wake">incremental.wake</a></li>
+<li><a class="reference internal" href="#sources-wake">sources.wake</a></li>
+<li><a class="reference internal" href="#pkgconfig-wake">pkgconfig.wake</a></li>
+<li><a class="reference internal" href="#path-wake">path.wake</a></li>
+<li><a class="reference internal" href="#gcc-wake">gcc.wake</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../contents.html">Documentation overview</a><ul>
+  <li><a href="../lib.html">&lt;no title&gt;</a><ul>
+      <li>Previous: <a href="../lib.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="../core/core.html" title="next chapter">core</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/system/system.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, John Andrews.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../_sources/system/system.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
