@@ -31,6 +31,7 @@
 struct Value;
 struct Expr;
 struct SourceMap;
+struct Runtime;
 struct PassPurity;
 struct PassUsage;
 struct PassSweep;
@@ -84,13 +85,13 @@ struct Term {
   static std::unique_ptr<Term> pass_purity(std::unique_ptr<Term> term, int pflag, size_t sflag);
   static std::unique_ptr<Term> pass_usage (std::unique_ptr<Term> term);
   static std::unique_ptr<Term> pass_sweep (std::unique_ptr<Term> term);
-  static std::unique_ptr<Term> pass_inline(std::unique_ptr<Term> term, size_t threshold);
+  static std::unique_ptr<Term> pass_inline(std::unique_ptr<Term> term, size_t threshold, Runtime &runtime);
   static std::unique_ptr<Term> pass_cse   (std::unique_ptr<Term> term);
 
   // Create SSA from AST
   static std::unique_ptr<Term> fromExpr(std::unique_ptr<Expr> expr);
   // The overall optimization strategy
-  static std::unique_ptr<Term> optimize(std::unique_ptr<Term> term);
+  static std::unique_ptr<Term> optimize(std::unique_ptr<Term> term, Runtime &runtime);
   // Convert Redux argument references to Scope indexes
   static std::unique_ptr<Term> scope(std::unique_ptr<Term> term);
 };

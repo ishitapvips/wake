@@ -16,6 +16,7 @@
  */
 
 #include "ssa.h"
+#include "prim.h"
 #include <unordered_map>
 
 static bool operator == (const std::shared_ptr<RootPointer<Value> > &x, const std::shared_ptr<RootPointer<Value> > &y) {
@@ -41,8 +42,18 @@ struct PassInline {
   TermStream stream;
   ConstantPool pool;
   size_t threshold;
-  PassInline(TargetScope &scope, size_t threshold_, size_t start = 0) : stream(scope, start), threshold(threshold_) { }
+  Runtime &runtime;
+  RootPointer<Scope> scope;
+  PassInline(TargetScope &scope, size_t threshold_, Runtime &runtime_, size_t start = 0);
 };
+
+PassInline::PassInline(TargetScope &scope, size_t threshold_, Runtime &runtime_, size_t start)
+ : stream(scope, start),
+   threshold(threshold_),
+   runtime(runtime_),
+   scope((runtime.heap.guarantee(Scope::reserve(1)),
+          runtime.heap.root(Scope::claim(runtime.heap, 1, nullptr, nullptr, nullptr)))) {
+}
 
 void RArg::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   meta = make_meta(1, 0); // we don't know the number unapplied args, but 0 prevents inlining anyway
@@ -93,7 +104,7 @@ static void rapp_inline(PassInline &p, std::unique_ptr<RApp> self) {
 
     if ((term->get(SSA_SINGLETON) || meta_size(term->meta) < p.threshold) && !term->get(SSA_RECURSIVE)) {
       auto fun = static_unique_pointer_cast<RFun>(term->clone());
-      PassInline q(p.stream.scope(), p.threshold, fnid); // refs up to fun are unmodified
+      PassInline q(p.stream.scope(), p.threshold, p.runtime, fnid); // refs up to fun are unmodified
       q.pool = std::move(p.pool);
       q.stream.discard(); // discard name of inlined fn
       for (size_t i = fargs.size(); i > 0; --i)
@@ -131,10 +142,39 @@ void RApp::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   rapp_inline(p, static_unique_pointer_cast<RApp>(std::move(self)));
 }
 
+#include <iostream>
 void RPrim::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   meta = make_meta(1, 0);
-  update(p.stream.map());
-  p.stream.transfer(std::move(self));
+  bool eval = (pflags & PRIM_IMPURE) == PRIM_PURE;
+  HeapObject *lit[args.size()];
+  for (unsigned i = 0; eval && i < args.size(); ++i) {
+    Term *term = p.stream[args[i]];
+    eval = term->id() == typeid(RLit);
+    if (eval) lit[i] = static_cast<RLit*>(term)->value->get();
+  }
+  if (eval) {
+    std::cout << "REDUCE " << name << " = ";
+    Promise *q = p.scope->at(0);
+    while (true) {
+      try {
+        (*fn)(data, p.runtime, p.scope.get(), 0, args.size(), &lit[0]);
+        break;
+      } catch (GCNeededException gc) {
+        p.runtime.heap.GC(gc.needed);
+      }
+    }
+    std::unique_ptr<RLit> out(new RLit(std::make_shared<RootPointer<Value> >(p.runtime.heap.root(q->coerce<Value>()))));
+    q->reset();
+    std::cout << out->value->get() << std::endl;
+    std::cout << out->value->get()->hashid() << std::endl;
+    // EEK! compound return types (list/pair/etc)
+    std::cout << "PASS" << std::endl;
+    out->pass_inline(p, std::move(out));
+    std::cout << "DONE" << std::endl;
+  } else {
+    update(p.stream.map());
+    p.stream.transfer(std::move(self));
+  }
 }
 
 void RGet::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
@@ -186,7 +226,7 @@ void RDes::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
           f->terms.emplace_back(new RArg());
           f->terms.emplace_back(new RApp(des->args[i], fnid+1));
           f->terms.emplace_back(new RDes(std::move(cargs)));
-          PassInline q(p.stream.scope(), p.threshold, fnid); // refs up to fun are unmodified
+          PassInline q(p.stream.scope(), p.threshold, p.runtime, fnid); // refs up to fun are unmodified
           q.pool = std::move(p.pool);
           f->pass_inline(q, std::unique_ptr<Term>(f));
           p.pool = std::move(q.pool);
@@ -250,9 +290,9 @@ void RFun::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   meta = make_meta(size, args);
 }
 
-std::unique_ptr<Term> Term::pass_inline(std::unique_ptr<Term> term, size_t threshold) {
+std::unique_ptr<Term> Term::pass_inline(std::unique_ptr<Term> term, size_t threshold, Runtime &runtime) {
   TargetScope scope;
-  PassInline pass(scope, threshold);
+  PassInline pass(scope, threshold, runtime);
   term->pass_inline(pass, std::move(term));
   return scope.finish();
 }
