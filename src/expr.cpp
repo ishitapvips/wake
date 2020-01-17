@@ -164,7 +164,8 @@ void Literal::format(std::ostream &os, int depth) const {
 }
 
 Hash Literal::hash() {
-  return hashcode = (*value)->hash() + type.hashcode;
+  // Only primitive values can be AST literals; so shallow is fine.
+  return hashcode = (*value)->shallow_hash() + type.hashcode;
 }
 
 void Prim::format(std::ostream &os, int depth) const {
