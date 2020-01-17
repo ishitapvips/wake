@@ -16,6 +16,7 @@
  */
 
 #include "ssa.h"
+#include "prim.h"
 #include "runtime.h"
 #include <unordered_map>
 
@@ -41,10 +42,15 @@ static size_t meta_args(size_t meta) { return meta & 255; }
 struct PassInlineCommon {
   TargetScope scope;
   ConstantPool pool;
+  RootPointer<Scope> output;
   size_t threshold;
 
   PassInlineCommon(Runtime *runtime, size_t threshold_) :
-    scope(), pool(128, DeepHash(runtime), DeepHash(runtime)), threshold(threshold_) { }
+    scope(),
+    pool(128, DeepHash(runtime), DeepHash(runtime)),
+    output((runtime->heap.guarantee(Scope::reserve(1)),
+            runtime->heap.root(Scope::claim(runtime->heap, 1, nullptr, nullptr, nullptr)))),
+    threshold(threshold_) { }
   Runtime *runtime() { return pool.hash_function().runtime; }
 };
 
@@ -141,10 +147,36 @@ void RApp::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   rapp_inline(p, static_unique_pointer_cast<RApp>(std::move(self)));
 }
 
+#include <iostream>
 void RPrim::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
   meta = make_meta(1, 0);
-  update(p.stream.map());
-  p.stream.transfer(std::move(self));
+  bool eval = (pflags & PRIM_IMPURE) == PRIM_PURE;
+  HeapObject *lit[args.size()];
+  for (unsigned i = 0; eval && i < args.size(); ++i) {
+    Term *term = p.stream[args[i]];
+    eval = term->id() == typeid(RLit);
+    if (eval) lit[i] = static_cast<RLit*>(term)->value->get();
+  }
+  if (eval) {
+    std::cout << "REDUCE " << name << " = ";
+    Promise *q = p.common.output->at(0);
+    Runtime &runtime = *p.common.runtime();
+    while (true) {
+      try {
+        (*fn)(data, runtime, p.common.output.get(), 0, args.size(), &lit[0]);
+        break;
+      } catch (GCNeededException gc) {
+        runtime.heap.GC(gc.needed);
+      }
+    }
+    std::unique_ptr<RLit> out(new RLit(std::make_shared<RootPointer<Value> >(runtime.heap.root(q->coerce<Value>()))));
+    q->reset();
+    std::cout << out->value->get() << std::endl;
+    out->pass_inline(p, std::move(out));
+  } else {
+    update(p.stream.map());
+    p.stream.transfer(std::move(self));
+  }
 }
 
 void RGet::pass_inline(PassInline &p, std::unique_ptr<Term> self) {
