@@ -373,6 +373,9 @@ struct Value : public HeapObject {
   // Shallow inspection of this object (including type)
   virtual bool shallow_equal(const Value &x) const = 0;
   virtual Hash shallow_hash() const = 0;
+  // These will assert fail if the Values contain broken Promises
+  bool deep_equal(const Value &x, Heap &heap);
+  Hash deep_hash(Heap &heap);
 };
 
 struct DestroyableObject : public Value {
