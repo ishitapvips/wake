@@ -371,7 +371,7 @@ const char *GCObject<T, B>::type() const {
 struct Value : public HeapObject {
   Category category() const override;
   // Shallow inspection of this object (including type)
-  virtual bool operator == (const Value &x) const;
+  virtual bool shallow_equal(const Value &x) const = 0;
   virtual Hash shallow_hash() const = 0;
 };
 

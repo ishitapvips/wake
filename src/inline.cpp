@@ -19,7 +19,7 @@
 #include <unordered_map>
 
 static bool operator == (const std::shared_ptr<RootPointer<Value> > &x, const std::shared_ptr<RootPointer<Value> > &y) {
-  return **x == **y;
+  return (*x)->shallow_equal(**y); // !!! want deep
 }
 
 namespace std {

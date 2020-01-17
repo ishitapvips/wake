@@ -126,7 +126,9 @@ struct Record : public Tuple {
 
   const char *type() const override;
   void format(std::ostream &os, FormatState &state) const override;
+
   Hash shallow_hash() const override;
+  bool shallow_equal(const Value &x) const override;
 
   static size_t reserve(size_t size);
   static Record *claim(Heap &h, Constructor *cons, size_t size); // requires prior h.reserve
@@ -141,7 +143,9 @@ struct Scope : public Tuple {
 
   const char *type() const override;
   void format(std::ostream &os, FormatState &state) const override;
+
   Hash shallow_hash() const override;
+  bool shallow_equal(const Value &x) const override;
 
   template <typename T, T (HeapPointerBase::*memberfn)(T x)>
   T recurse(T arg) {

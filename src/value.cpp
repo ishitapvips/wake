@@ -25,13 +25,9 @@
 #include "sfinae.h"
 #include "tuple.h"
 #include <sstream>
+#include <cmath>
 #include <string.h>
 #include <assert.h>
-
-bool Value::operator == (const Value &x) const {
-  assert(0 /* unreachable */);
-  return false;
-}
 
 void FormatState::resume() {
   stack.emplace_back(current.value, current.precedence, current.state+1);
@@ -173,9 +169,10 @@ Hash String::shallow_hash() const {
   return Hash(c_str(), length) ^ TYPE_STRING;
 }
 
-bool String::operator == (const Value &x) const {
+bool String::shallow_equal(const Value &x) const {
   if (typeid(x) != typeid(*this)) return false;
-  return compare(static_cast<const String &>(x)) == 0;
+  const String *that = static_cast<const String *>(&x);
+  return this == that || compare(*that) == 0;
 }
 
 TypeVar Integer::typeVar("Integer", 0);
@@ -220,9 +217,11 @@ Hash Integer::shallow_hash() const {
   return Hash(data(), abs(length)*sizeof(mp_limb_t)) ^ TYPE_INTEGER;
 }
 
-bool Integer::operator == (const Value &x) const {
+bool Integer::shallow_equal(const Value &x) const {
   if (typeid(x) != typeid(*this)) return false;
-  mpz_t a = { wrap() }, b = { static_cast<const Integer &>(x).wrap() };
+  const Integer *that = static_cast<const Integer *>(&x);
+  if (this == that) return true;
+  mpz_t a = { wrap() }, b = { that->wrap() };
   return mpz_cmp(a, b) == 0;
 }
 
@@ -242,9 +241,11 @@ Hash Double::shallow_hash() const {
   return Hash(&value, sizeof(value)) ^ TYPE_DOUBLE;
 }
 
-bool Double::operator == (const Value &x) const {
+bool Double::shallow_equal(const Value &x) const {
   if (typeid(x) != typeid(*this)) return false;
-  return value == static_cast<const Double &>(x).value;
+  const Double *that = static_cast<const Double *>(&x);
+  if (std::isnan(value)) return std::isnan(that->value);
+  return value == that->value;
 }
 
 std::string Double::str(int format, int precision) const {
@@ -322,9 +323,10 @@ Hash RegExp::shallow_hash() const {
   return Hash(exp->pattern()) ^ TYPE_REGEXP;
 }
 
-bool RegExp::operator == (const Value &x) const {
+bool RegExp::shallow_equal(const Value &x) const {
   if (typeid(x) != typeid(*this)) return false;
-  return exp->pattern() == static_cast<const RegExp &>(x).exp->pattern();
+  const RegExp *that = static_cast<const RegExp *>(&x);
+  return this == that || exp->pattern() == that->exp->pattern();
 }
 
 RootPointer<RegExp> RegExp::literal(Heap &h, const std::string &value) {
@@ -341,11 +343,25 @@ Hash Closure::shallow_hash() const {
   return (fun->hash + Hash(applied)) ^ TYPE_CLOSURE;
 }
 
+bool Closure::shallow_equal(const Value &x) const {
+  if (typeid(x) != typeid(*this)) return false;
+  const Closure *that = static_cast<const Closure *>(&x);
+  return applied == that->applied && fun == that->fun;
+}
+
 Hash Record::shallow_hash() const {
   uint64_t buf[2];
   buf[0] = size();
   buf[1] = cons?cons->index:~static_cast<uint64_t>(0);
   return Hash(&buf[0], sizeof(buf)) ^ TYPE_RECORD;
+}
+
+bool Record::shallow_equal(const Value &x) const {
+  if (const Record *that = dynamic_cast<const Record*>(&x)) {
+    return cons == that->cons && size() == that->size();
+  } else {
+    return false;
+  }
 }
 
 void Record::format(std::ostream &os, FormatState &state) const {
@@ -406,6 +422,14 @@ Hash Scope::shallow_hash() const {
   uint64_t buf[1];
   buf[0] = size();
   return Hash(&buf[0], sizeof(buf)) ^ TYPE_SCOPE;
+}
+
+bool Scope::shallow_equal(const Value &x) const {
+  if (const Scope *that = dynamic_cast<const Scope *>(&x)) {
+    return size() == that->size();
+  } else {
+    return false;
+  }
 }
 
 void Scope::format(std::ostream &os, FormatState &state) const {

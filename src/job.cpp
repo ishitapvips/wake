@@ -110,6 +110,7 @@ struct Job final : public GCObject<Job, Value> {
 
   void format(std::ostream &os, FormatState &state) const override;
   Hash shallow_hash() const override;
+  bool shallow_equal(const Value &x) const override;
 
   uint64_t memory() const;
   double threads() const;
@@ -888,6 +889,12 @@ Job::Job(Database *db_, String *dir_, String *stdin_, String *environ, String *c
 
 Hash Job::shallow_hash() const {
   return Hash(job) ^ TYPE_JOB;
+}
+
+bool Job::shallow_equal(const Value &x) const {
+  if (typeid(x) != typeid(*this)) return false;
+  const Job *that = static_cast<const Job *>(&x);
+  return job == that->job;
 }
 
 #define JOB(arg, i) do { HeapObject *arg = args[i]; REQUIRE(typeid(*arg) == typeid(Job)); } while(0); Job *arg = static_cast<Job*>(args[i]);
