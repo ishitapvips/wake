@@ -148,6 +148,10 @@ Hash Value::deep_hash(Heap &heap) {
   return x.code;
 }
 
+bool Value::deep_equal(Value &x, Heap &heap) {
+  return deep_hash(heap) == x.deep_hash(heap);
+}
+
 struct CHash final : public GCObject<CHash, Continuation> {
   HeapPointer<HeapObject> obj;
   HeapPointer<Continuation> cont;

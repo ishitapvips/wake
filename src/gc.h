@@ -374,7 +374,7 @@ struct Value : public HeapObject {
   virtual bool shallow_equal(const Value &x) const = 0;
   virtual Hash shallow_hash() const = 0;
   // These will assert fail if the Values contain broken Promises
-  bool deep_equal(const Value &x, Heap &heap);
+  bool deep_equal(Value &x, Heap &heap);
   Hash deep_hash(Heap &heap);
 };
 

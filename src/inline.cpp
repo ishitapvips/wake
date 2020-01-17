@@ -27,7 +27,7 @@ struct DeepHash {
     return (*x)->deep_hash(runtime->heap).mix();
   }
   bool operator ()(const std::shared_ptr<RootPointer<Value> > &x, const std::shared_ptr<RootPointer<Value> > &y) const {
-    return (*x)->shallow_equal(**y); // !!! want deep
+    return (*x)->deep_equal(**y, runtime->heap);
   }
 };
 
